@@ -40,15 +40,15 @@ public class TreasureHunter {
      * Creates a hunter object at the beginning of the game and populates the class member variable with it.
      */
     private void welcomePlayer() {
-        System.out.println("Welcome to TREASURE HUNTER!");
-        System.out.println("Going hunting for the big treasure, eh?");
+        System.out.printf("Welcome to %sTREASURE HUNTER%s!", Color.GREEN, Color.RESET);
+        System.out.printf("Going %shunting%s for the %sbig treasure%s, eh?", Color.RED, Color.RESET, Color.YELLOW, Color.RESET);
         System.out.print("What's your name, Hunter? ");
         String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
         hunter = new Hunter(name, 10);
 
-        System.out.print("Hard mode? (y/n): ");
+        System.out.printf("%sHard%s mode? (%sy%s/%sn%s): ", Color.RED, Color.RESET, Color.GREEN, Color.RESET, Color.RED, Color.RESET);
         String hard = SCANNER.nextLine().toLowerCase();
         if (hard.equals("y")) {
             hardMode = true;
