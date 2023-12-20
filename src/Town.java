@@ -113,6 +113,30 @@ public class Town {
         }
     }
 
+    /**
+     * Gives the hunter a chance to find some treasure!<p>
+     * The chances of finding a treasure worth something is 75%.<p>
+     * If the user hunts once, then the option to hunt is not available anymore and returns a message saying that they can no longer hunt for treasure in the town
+     */
+    public void huntForTreasure() {
+        String[] treasures = new String[]{"crown", "trophy", "gem", "dust"};
+        String treasure = "dust";
+        double rand = Math.random();
+        if (rand < .25) {
+            treasure = treasures[0];
+        } else if (rand < .5) {
+            treasure = treasures[1];
+        } else if (rand < .75) {
+            treasure = treasures[2];
+        }
+        if (!treasure.equals("dust")) {
+            System.out.printf("You found a %s%s", treasure, Color.YELLOW);
+        } else {
+            System.out.println("You found dust, sorry!");
+        }
+
+    }
+
     public String toString() {
         return String.format("This nice little town is surrounded by %s%s%s.", Color.YELLOW, terrain.getTerrainName(), Color.RESET);
     }

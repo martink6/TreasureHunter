@@ -112,6 +112,7 @@ public class TreasureHunter {
             System.out.printf("(%sS%s)ell something at the shop.%n", Color.RED, Color.RESET);
             System.out.printf("(%sM%s)ove on to a different town.%n", Color.YELLOW, Color.RESET);
             System.out.printf("(%sL%s)ook for trouble!%n", Color.PURPLE, Color.RESET);
+            System.out.printf("(%sH%s)unt for treasure!!%n", Color.BLUE, Color.RESET);
             System.out.printf("Give up the hunt and e(%sX%s)it.%n", Color.CYAN, Color.RESET);
             System.out.println();
             System.out.print("What's your next move? ");
