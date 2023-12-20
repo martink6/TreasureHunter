@@ -145,7 +145,7 @@ public class Hunter {
      * @return A string representation of the hunter.
      */
     public String toString() {
-        String str = hunterName + " has " + gold + " gold";
+        String str = String.format("%s%s%s has %s%s%s %sgold%s", Color.CYAN, hunterName, Color.RESET, Color.YELLOW, gold, Color.RESET, Color.GREEN, Color.RESET);
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }

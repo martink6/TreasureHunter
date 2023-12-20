@@ -17,7 +17,6 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
 
-
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -108,11 +107,11 @@ public class TreasureHunter {
             System.out.println("***");
             System.out.println(hunter);
             System.out.println(currentTown);
-            System.out.println("(B)uy something at the shop.");
-            System.out.println("(S)ell something at the shop.");
-            System.out.println("(M)ove on to a different town.");
-            System.out.println("(L)ook for trouble!");
-            System.out.println("Give up the hunt and e(X)it.");
+            System.out.printf("(%sB%s)uy something at the shop.%n", Color.GREEN, Color.RESET);
+            System.out.printf("(%sS%s)ell something at the shop.%n", Color.RED, Color.RESET);
+            System.out.printf("(%sM%s)ove on to a different town.%n", Color.YELLOW, Color.RESET);
+            System.out.printf("(%sL%s)ook for trouble!%n", Color.PURPLE, Color.RESET);
+            System.out.printf("Give up the hunt and e(%sX%s)it.%n", Color.CYAN, Color.RESET);
             System.out.println();
             System.out.print("What's your next move? ");
             choice = SCANNER.nextLine().toLowerCase();
@@ -125,20 +124,19 @@ public class TreasureHunter {
      * @param choice The action to process.
      */
     private void processChoice(String choice) {
-        if (choice.equals("b") || choice.equals("s")) {
-            currentTown.enterShop(choice);
-        } else if (choice.equals("m")) {
-            if (currentTown.leaveTown()) {
-                // This town is going away so print its news ahead of time.
-                System.out.println(currentTown.getLatestNews());
-                enterTown();
+        switch (choice) {
+            case "b", "s" -> currentTown.enterShop(choice);
+            case "m" -> {
+                if (currentTown.leaveTown()) {
+                    // This town is going away so print its news ahead of time.
+                    System.out.println(currentTown.getLatestNews());
+                    enterTown();
+                }
             }
-        } else if (choice.equals("l")) {
-            currentTown.lookForTrouble();
-        } else if (choice.equals("x")) {
-            System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
-        } else {
-            System.out.println("Yikes! That's an invalid option! Try again.");
+            case "l" -> currentTown.lookForTrouble();
+            case "x" ->
+                    System.out.printf("Fare thee well, %s%s%s !%n", Color.YELLOW, hunter.getHunterName(), Color.RESET);
+            default -> System.out.printf("Yikes! That's an %sinvalid%s option! Try again.%n", Color.RED, Color.RESET);
         }
     }
 }

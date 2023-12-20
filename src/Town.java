@@ -43,12 +43,12 @@ public class Town {
      */
     public void hunterArrives(Hunter hunter) {
         this.hunter = hunter;
-        printMessage = "Welcome to town, " + hunter.getHunterName() + ".";
+        printMessage = String.format("Welcome to town, %s%s%s.", Color.GREEN, hunter.getHunterName(), Color.RESET);
 
         if (toughTown) {
-            printMessage += "\nIt's pretty rough around here, so watch yourself.";
+            printMessage += String.format("\nIt's pretty %srough%s around here, so %swatch yourself%s.", Color.RED, Color.RESET, Color.RED, Color.RESET);
         } else {
-            printMessage += "\nWe're just a sleepy little town with mild mannered folk.";
+            printMessage += String.format("\nWe're just a %ssleepy%s little town with %smild mannered%s folk.", Color.BLUE, Color.RESET, Color.BLUE, Color.RESET);
         }
     }
 
@@ -61,16 +61,16 @@ public class Town {
         boolean canLeaveTown = terrain.canCrossTerrain(hunter);
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
-            printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
+            printMessage = String.format("You used your %s%s%s to cross the %s%s%s.", Color.YELLOW, item, Color.RESET, Color.YELLOW, terrain.getTerrainName(), Color.RESET);
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, your " + item + " broke.";
+                printMessage += String.format("\nUnfortunately, your %s%s%s %sbroke%s.", Color.YELLOW, item, Color.RESET, Color.RED, Color.RESET);
             }
 
             return true;
         }
 
-        printMessage = "You can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + ".";
+        printMessage = String.format("You can't leave town, %s%s%s. You don't have a %s%s%s.", Color.GREEN, hunter.getHunterName(), Color.RESET, Color.YELLOW, terrain.getNeededItem(), Color.RESET);
         return false;
     }
 
@@ -99,22 +99,22 @@ public class Town {
         if (Math.random() > noTroubleChance) {
             printMessage = "You couldn't find any trouble";
         } else {
-            printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
+            printMessage = String.format("You want trouble, %sstranger%s!  You got it!\nOof! Umph! Ow!\n", Color.RED, Color.RESET);
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (Math.random() > noTroubleChance) {
                 printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
-                printMessage += "\nYou won the brawl and receive " + goldDiff + " gold.";
+                printMessage += String.format("\nYou %swon%s the brawl and receive %s%s%s gold.", Color.GREEN, Color.RESET, Color.YELLOW, goldDiff, Color.RESET);
                 hunter.changeGold(goldDiff);
             } else {
                 printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
-                printMessage += "\nYou lost the brawl and pay " + goldDiff + " gold.";
+                printMessage += String.format("\nYou %slost%s the brawl and pay %s%s%s gold.", Color.RED, Color.RESET, Color.YELLOW, goldDiff, Color.RESET);
                 hunter.changeGold(-goldDiff);
             }
         }
     }
 
     public String toString() {
-        return "This nice little town is surrounded by " + terrain.getTerrainName() + ".";
+        return String.format("This nice little town is surrounded by %s%s%s.", Color.YELLOW, terrain.getTerrainName(), Color.RESET);
     }
 
     /**
