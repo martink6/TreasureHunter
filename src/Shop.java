@@ -50,7 +50,7 @@ public class Shop {
             if (cost == 0) {
                 System.out.println("We ain't got none of those.");
             } else {
-                System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
+                System.out.printf("It'll cost you %s%s%s gold. Buy it (%sy%s/%sn%s)? ", Color.YELLOW, cost, Color.RESET, Color.GREEN, Color.RESET, Color.RED, Color.RESET);
                 String option = SCANNER.nextLine().toLowerCase();
 
                 if (option.equals("y")) {
@@ -65,7 +65,7 @@ public class Shop {
             if (cost == 0) {
                 System.out.println("We don't want none of those.");
             } else {
-                System.out.print("It'll get you " + cost + " gold. Sell it (y/n)? ");
+                System.out.printf("It'll get you %s%s%s gold. Sell it (%sy%s/%sn%s)? ", Color.YELLOW, cost, Color.RESET, Color.GREEN, Color.RESET, Color.RED, Color.RESET);
                 String option = SCANNER.nextLine().toLowerCase();
 
                 if (option.equals("y")) {
@@ -99,7 +99,7 @@ public class Shop {
     public void buyItem(String item) {
         int costOfItem = checkMarketPrice(item, true);
         if (customer.buyItem(item, costOfItem)) {
-            System.out.println("Ye' got yerself a " + item + ". Come again soon.");
+            System.out.printf("Ye' got yerself a %s%s%s. Come again soon.%n", Color.YELLOW, item, Color.RESET);
         } else {
             System.out.println("Hmm, either you don't have enough gold or you've already got one of those!");
         }
@@ -141,19 +141,14 @@ public class Shop {
      * @return The cost of the item or 0 if the item is not found.
      */
     public int getCostOfItem(String item) {
-        if (item.equals("water")) {
-            return WATER_COST;
-        } else if (item.equals("rope")) {
-            return ROPE_COST;
-        } else if (item.equals("machete")) {
-            return MACHETE_COST;
-        } else if (item.equals("horse")) {
-            return HORSE_COST;
-        } else if (item.equals("boat")) {
-            return BOAT_COST;
-        } else {
-            return 0;
-        }
+        return switch (item) {
+            case "water" -> WATER_COST;
+            case "rope" -> ROPE_COST;
+            case "machete" -> MACHETE_COST;
+            case "horse" -> HORSE_COST;
+            case "boat" -> BOAT_COST;
+            default -> 0;
+        };
     }
 
     /**
@@ -163,7 +158,6 @@ public class Shop {
      * @return The sell price of the item.
      */
     public int getBuyBackCost(String item) {
-        int cost = (int) (getCostOfItem(item) * markdown);
-        return cost;
+        return (int) (getCostOfItem(item) * markdown);
     }
 }
