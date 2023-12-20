@@ -125,18 +125,31 @@ public class TreasureHunter {
      */
     private void processChoice(String choice) {
         switch (choice) {
-            case "b", "s" -> currentTown.enterShop(choice);
-            case "m" -> {
+            case "b", "s":
+                currentTown.enterShop(choice);
+                break;
+            case "m":
                 if (currentTown.leaveTown()) {
                     // This town is going away so print its news ahead of time.
                     System.out.println(currentTown.getLatestNews());
                     enterTown();
                 }
-            }
-            case "l" -> currentTown.lookForTrouble();
-            case "x" ->
-                    System.out.printf("Fare thee well, %s%s%s !%n", Color.YELLOW, hunter.getHunterName(), Color.RESET);
-            default -> System.out.printf("Yikes! That's an %sinvalid%s option! Try again.%n", Color.RED, Color.RESET);
+                break;
+            case "l":
+                currentTown.lookForTrouble();
+                if (hunter.getGold() <= 0) {
+                    System.out.println(currentTown.getLatestNews());
+                    System.out.printf("You're out of gold, %s%s%s. You're gonna have to go home.%n", Color.GREEN, hunter.getHunterName(), Color.RESET);
+                    processChoice("x");
+                }
+                break;
+            case "x":
+                System.out.printf("Fare thee well, %s%s%s !%n", Color.YELLOW, hunter.getHunterName(), Color.RESET);
+                System.exit(0);
+                break;
+            default :
+                System.out.printf("Yikes! That's an %sinvalid%s option! Try again.%n", Color.RED, Color.RESET);
+                break;
         }
     }
 }

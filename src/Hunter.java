@@ -40,6 +40,15 @@ public class Hunter {
     }
 
     /**
+     * @return The amount of gold the hunter has.
+     * @see #changeGold(int)
+     */
+
+    public int getGold() {
+        return gold;
+    }
+
+    /**
      * Buys an item from a shop.
      *
      * @param item The item the hunter is buying.
