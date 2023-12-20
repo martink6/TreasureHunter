@@ -17,6 +17,7 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
 
+
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -41,8 +42,8 @@ public class TreasureHunter {
      */
     private void welcomePlayer() {
         System.out.printf("Welcome to %sTREASURE HUNTER%s!", Color.GREEN, Color.RESET);
-        System.out.printf("Going %shunting%s for the %sbig treasure%s, eh?", Color.RED, Color.RESET, Color.YELLOW, Color.RESET);
-        System.out.print("What's your name, Hunter? ");
+        System.out.printf(" Going %shunting%s for the %sbig treasure%s, eh?", Color.RED, Color.RESET, Color.YELLOW, Color.RESET);
+        System.out.print(" What's your name, Hunter? ");
         String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
@@ -52,6 +53,13 @@ public class TreasureHunter {
         String hard = SCANNER.nextLine().toLowerCase();
         if (hard.equals("y")) {
             hardMode = true;
+        } else if (hard.equals("test")) {
+            hunter.changeGold(95);
+            hunter.buyItem("water", 1);
+            hunter.buyItem("rope", 1);
+            hunter.buyItem("machete", 1);
+            hunter.buyItem("horse", 1);
+            hunter.buyItem("boat", 1);
         }
     }
 
