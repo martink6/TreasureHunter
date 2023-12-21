@@ -53,7 +53,7 @@ public class TreasureHunter {
         if (hard.equals("y")) {
             hardMode = true;
         } else if (hard.equals("test")) {
-            hunter.changeGold(96);
+            hunter.changeGold(96); //add 90 for 100 and an additional 1 for every item added
             hunter.buyItem("water", 1);
             hunter.buyItem("rope", 1);
             hunter.buyItem("machete", 1);
@@ -139,6 +139,14 @@ public class TreasureHunter {
                 break;
             case "l":
                 currentTown.lookForTrouble();
+                if (hunter.getGold() <= 0) {
+                    System.out.println(currentTown.getLatestNews());
+                    System.out.printf("You're out of gold, %s%s%s. You're gonna have to go home.%n", Color.GREEN, hunter.getHunterName(), Color.RESET);
+                    processChoice("x");
+                }
+                break;
+            case "h":
+                currentTown.huntForTreasure();
                 if (hunter.getGold() <= 0) {
                     System.out.println(currentTown.getLatestNews());
                     System.out.printf("You're out of gold, %s%s%s. You're gonna have to go home.%n", Color.GREEN, hunter.getHunterName(), Color.RESET);

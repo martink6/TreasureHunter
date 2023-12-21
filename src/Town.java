@@ -11,6 +11,7 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private boolean searchedTown;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -30,10 +31,16 @@ public class Town {
 
         // higher toughness = more likely to be a tough town
         toughTown = (Math.random() < toughness);
+
+        searchedTown = false;
     }
 
     public String getLatestNews() {
         return printMessage;
+    }
+
+    public boolean isSearchedTown() {
+        return searchedTown;
     }
 
     /**
@@ -66,7 +73,7 @@ public class Town {
                 hunter.removeItemFromKit(item);
                 printMessage += String.format("\nUnfortunately, your %s%s%s %sbroke%s.", Color.YELLOW, item, Color.RESET, Color.RED, Color.RESET);
             }
-
+            searchedTown = false;
             return true;
         }
 
@@ -119,22 +126,31 @@ public class Town {
      * If the user hunts once, then the option to hunt is not available anymore and returns a message saying that they can no longer hunt for treasure in the town
      */
     public void huntForTreasure() {
-        String[] treasures = new String[]{"crown", "trophy", "gem", "dust"};
-        String treasure = "dust";
-        double rand = Math.random();
-        if (rand < .25) {
-            treasure = treasures[0];
-        } else if (rand < .5) {
-            treasure = treasures[1];
-        } else if (rand < .75) {
-            treasure = treasures[2];
-        }
-        if (!treasure.equals("dust")) {
-            System.out.printf("You found a %s%s", treasure, Color.YELLOW);
+        if(!searchedTown) {
+            String[] treasures = new String[]{"a crown", "a trophy", "a gem", "dust"}; //in case more treasure is needed, then we can add it to this array
+            String treasure = "dust";
+            double rand = Math.random();
+            if (rand < .25) {
+                treasure = treasures[0];
+            } else if (rand < .5) {
+                treasure = treasures[1];
+            } else if (rand < .75) {
+                treasure = treasures[2];
+            }  //else would have been to set treasure to dust
+            if (!treasure.equals("dust")) {
+                if (!hunter.hasTreasure(treasure)) {
+                    System.out.printf("You found %s%s" + "!", Color.YELLOW, treasure);
+                    hunter.addTreasure(treasure);
+                } else {
+                    System.out.printf("You already found %s%s, sorry!", Color.YELLOW, treasure);
+                }
+            } else {
+                System.out.println("You found dust, sorry!");
+            }
+            searchedTown = true;
         } else {
-            System.out.println("You found dust, sorry!");
+            System.out.println("Ye' search treasure in empty soil!");
         }
-
     }
 
     public String toString() {

@@ -67,6 +67,13 @@ public class Hunter {
         return true;
     }
 
+    /**
+     * Gets a treasure from hunting
+     *
+     * @param item The item that the hunter "dug up"
+     * @return true if the item is successfully added to inventory.
+     */
+
     public boolean addTreasure(String item) {
         if (!hasTreasure(item)) {
             int idx = emptyPositionInTreasures();
@@ -143,6 +150,13 @@ public class Hunter {
         return false;
     }
 
+    /**
+     * Checks if the treasure is in the hunter's arsenal.
+     *
+     * @param item The search treasure
+     * @return true if the treasure is found.
+     */
+
     public boolean hasTreasure(String item) {
         for (String tmpItem : treasures) {
             if (item.equals(tmpItem)) {
@@ -174,12 +188,35 @@ public class Hunter {
     }
 
     /**
+     * Returns a printable representation of the treasures, which
+     * is a list of the treasures that the hunter has, with a space between each item.
+     *
+     * @return The printable String representation of the inventory.
+     */
+
+    public String getTreasure() {
+        String printableTreasure = "";
+        String space = " ";
+
+        for (String treasure : treasures) {
+            if (treasure != null) {
+                printableTreasure += treasure + space;
+            }
+        }
+
+        return printableTreasure;
+    }
+
+    /**
      * @return A string representation of the hunter.
      */
     public String toString() {
         String str = String.format("%s%s%s has %s%s%s %sgold%s", Color.CYAN, hunterName, Color.RESET, Color.YELLOW, gold, Color.RESET, Color.GREEN, Color.RESET);
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
+        }
+        if (!treasureIsEmpty()) {
+            str += "and " + getTreasure();
         }
         return str;
     }
@@ -216,9 +253,24 @@ public class Hunter {
 
         return true;
     }
+    /**
+     * Check if the treasures is empty - meaning all elements are null.
+     *
+     * @return true if kit is completely empty.
+     */
+    private boolean treasureIsEmpty() {
+        for (String treasure : treasures) {
+            if (treasure != null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     /**
-     * Finds the first index where there is a null value.
+     * Finds the first index where there is a null value. (for kit)
      *
      * @return index of empty index, or -1 if not found.
      */
@@ -231,6 +283,12 @@ public class Hunter {
 
         return -1;
     }
+
+    /**
+     * Finds the first index where there is a null value. (for treasures)
+     *
+     * @return index of empty index, or -1 if not found.
+     */
 
     private int emptyPositionInTreasures() {
         for (int i = 0; i < treasures.length; i++) {
