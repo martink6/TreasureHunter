@@ -71,7 +71,7 @@ public class Town {
             printMessage = String.format("You used your %s%s%s to cross the %s%s%s.", Color.YELLOW, item, Color.RESET, Color.YELLOW, terrain.getTerrainName(), Color.RESET);
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += String.format("\nUnfortunately, your %s%s%s %sbroke%s.", Color.YELLOW, item, Color.RESET, Color.RED, Color.RESET);
+                printMessage += String.format("\nUnfortunately, you lost your %s%s%s.", Color.YELLOW, item, Color.RESET);
             }
             searchedTown = false;
 

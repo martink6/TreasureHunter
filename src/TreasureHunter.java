@@ -144,6 +144,7 @@ public class TreasureHunter {
                     System.out.printf("You're out of gold, %s%s%s. You're gonna have to go home.%n", Color.GREEN, hunter.getHunterName(), Color.RESET);
                     processChoice("x");
                 }
+                clearScreen("The townsfolk talk about ye' now");
                 break;
             case "h":
                 currentTown.huntForTreasure();
@@ -158,6 +159,7 @@ public class TreasureHunter {
                     System.out.printf("You found all the treasures, %s%s%s! You win!%n", Color.GREEN, hunter.getHunterName(), Color.RESET);
                     processChoice("x");
                 }
+                clearScreen("");
                 break;
             case "x":
                 System.out.printf("Fare thee well, %s%s%s !%n", Color.YELLOW, hunter.getHunterName(), Color.RESET);
