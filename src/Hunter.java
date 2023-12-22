@@ -293,7 +293,7 @@ public class Hunter {
      * @return index of empty index, or -1 if not found.
      */
 
-    private int emptyPositionInTreasures() {
+    public int emptyPositionInTreasures() {
         for (int i = 0; i < treasures.length; i++) {
             if (treasures[i] == null) {
                 return i;
