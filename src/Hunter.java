@@ -215,8 +215,11 @@ public class Hunter {
         if (!kitIsEmpty()) {
             str += " and " + getInventory();
         }
+        str += "\nTreasure: ";
         if (!treasureIsEmpty()) {
-            str += "and " + getTreasure();
+            str += getTreasure();
+        } else {
+            str += "none!";
         }
         return str;
     }
