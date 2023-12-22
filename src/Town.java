@@ -74,6 +74,7 @@ public class Town {
                 printMessage += String.format("\nUnfortunately, your %s%s%s %sbroke%s.", Color.YELLOW, item, Color.RESET, Color.RED, Color.RESET);
             }
             searchedTown = false;
+
             return true;
         }
 
@@ -88,6 +89,7 @@ public class Town {
      */
     public void enterShop(String choice) {
         shop.enter(hunter, choice);
+        TreasureHunter.clearScreen("You left the shop");
     }
 
     /**

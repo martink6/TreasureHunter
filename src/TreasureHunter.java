@@ -162,4 +162,18 @@ public class TreasureHunter {
                 break;
         }
     }
+
+    /**
+     Asks the user to continue and clears the screen
+     Can add a remark if needed
+     */
+    public static void clearScreen(String remark){
+        System.out.println("\n\nPress enter to continue!");
+        Scanner s = new Scanner(System.in);
+        s.nextLine();
+        for (int i = 0; i < 50; i++) {
+            System.out.println("\n");
+        }
+        System.out.println(remark);
+    }
 }
