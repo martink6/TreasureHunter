@@ -151,6 +151,12 @@ public class TreasureHunter {
                     System.out.println(currentTown.getLatestNews());
                     System.out.printf("You're out of gold, %s%s%s. You're gonna have to go home.%n", Color.GREEN, hunter.getHunterName(), Color.RESET);
                     processChoice("x");
+                    break;
+                }
+                if (hunter.emptyPositionInTreasures() == -1) {
+                    System.out.println(currentTown.getLatestNews());
+                    System.out.printf("You found all the treasures, %s%s%s! You win!%n", Color.GREEN, hunter.getHunterName(), Color.RESET);
+                    processChoice("x");
                 }
                 break;
             case "x":
